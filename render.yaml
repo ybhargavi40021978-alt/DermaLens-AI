@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: dermalens-ai
+    env: python
+    buildCommand: |
+      # 1. Build React frontend assets
+      npm install
+      npm run build
+      # 2. Build Python backend dependencies
+      cd backend
+      pip install -r requirements.txt
+    startCommand: |
+      cd backend
+      uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: true
+      - key: OPENROUTER_MODEL
+        value: openai/gpt-4o-mini
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: DATABASE_PATH
+        value: /opt/render/project/src/backend/storage/dermalens.db
+    disk:
+      name: dermalens-storage
+      mountPath: /opt/render/project/src/backend/storage
+      sizeGB: 1

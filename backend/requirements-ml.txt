@@ -1,0 +1,9 @@
+# Install alongside backend/requirements.txt for the optional ML pipeline.
+torch>=2.2.0
+torchvision>=0.17.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+opencv-python-headless>=4.9.0
+matplotlib>=3.8.0
+streamlit>=1.32.0
+pandas>=2.1.0
